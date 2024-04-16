@@ -2,26 +2,23 @@ import React from 'react'
 
 // se reutilizará para el SORT y el PROFESIONS
 
-function Dropdown() {
+function Dropdown({ labelText, optionsList }: { labelText: string, optionsList: string[] }) {
 
-    // const renderJobsList = gnomes.map((gnome, i) => {
 
-    //     return <option value={gnome[i].job}>{gnome[i].job} </option>
-    // })
 
     return (
-        <div>
-            <label htmlFor=""></label>
+        <section>
+            <label htmlFor="">{labelText}</label>
 
             <select
                 className=""
             >
-                {/*crear el FOR */}
+                {optionsList.map((option, i) => <option value={option} key={i}>{option}</option>)}
 
 
             </select>
 
-        </div>
+        </section>
     )
 }
 
