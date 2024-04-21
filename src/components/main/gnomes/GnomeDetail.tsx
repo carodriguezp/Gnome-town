@@ -28,13 +28,6 @@ function GnomeDetail() {
         }
     }
 
-    // if (isFriend) {
-    //     newFriendText = "Now we are friends";
-    //     newFriendIconText = "fa-heart";
-    // } else {
-    //     newFriendText = "We are not friends, Do you want to be one?";
-    //     newFriendIconText = "fa-heart-crack";
-    // }
 
     const { pathname } = useLocation(); //pathname es la propiedad de la info de la ruta, hacemos destructuring
 
