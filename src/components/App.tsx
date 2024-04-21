@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import { getDataFromApi } from '../services/api';
 import type { GnomeType, GnomeTypeResponse } from '../components/common.types'
@@ -9,8 +10,10 @@ import Form from './main/form/Form';
 import Footer from './Footer';
 import GnomeList from './main/gnomes/GnomeList';
 
-import logo from '../logo.svg';
+
 import '../App.css';
+import GnomeDetail from './main/gnomes/GnomeDetail';
+import Main from './main/Main';
 
 function App() {
 
@@ -31,11 +34,23 @@ function App() {
 
 
   return (
-    <main className="App">
+    <main className="">
 
       <Header />
-      <Form />
-      <GnomeList />
+
+      <Routes>
+        <Route path='/' element={
+          <>
+            <Main />
+          </>
+        }
+        />
+        <Route path='/gnome/:idGnome' element={<GnomeDetail />} />
+      </Routes>
+
+
+
+
       <Footer />
 
     </main>
