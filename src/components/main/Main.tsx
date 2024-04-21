@@ -10,7 +10,7 @@ import GnomeList from './gnomes/GnomeList';
 function Main() {
 
     const [gnomes, setGnomes] = useState<GnomeTypeResponse[]>([]);
-
+    const [filterName, setFilterName] = useState("") //para guardar el Filter por nombre
 
     async function fetchGnomes() {
         try {
@@ -22,7 +22,17 @@ function Main() {
         }
     }
 
+    //SEARCH FOR NAME
+    const handleFilterName = (value: string) => {
+        setFilterName(value)
+    }
 
+    const filteredGnomes = gnomes
+        .filter((gnome) => {
+            return gnome.name.toLowerCase().includes(filterName.toLowerCase())
+        })
+
+    const hasFiltered = !!filteredGnomes.length
 
     useEffect(() => {
         fetchGnomes();
@@ -32,9 +42,9 @@ function Main() {
     return (
         <section>
 
-            <Form />
+            <Form filterName={filterName} handleFilterName={handleFilterName} hasFiltered={hasFiltered} />
 
-            <GnomeList gnomes={gnomes} />
+            <GnomeList gnomes={filteredGnomes} />
         </section>
     )
 }

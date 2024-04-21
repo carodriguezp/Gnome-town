@@ -1,14 +1,18 @@
 import React from 'react'
 
-function InputText({ }) {
+type InputTextType = { value: string, handleChange: (x: string) => void, placeholder: string, hasFiltered: boolean }
+
+function InputText({ value, handleChange, placeholder, hasFiltered }: InputTextType) {
+
+
     return (
         <section>
 
 
             <label htmlFor="" className="">Search for Name</label>
-            {/* <input className="" type="text" name="" id="" placeholder="Tobus Quickwhistle" value={filterName} onChange={(ev) => handleFilterName(ev.target.value)} />
+            <input className="" type="text" name="" id="" placeholder={placeholder} value={value} onChange={(ev) => handleChange(ev.target.value)} />
 
-            {(!hasFiltered && filterName) && <p className="error" >There is no gnome matching the word {filterName}</p>} */}
+            {(!hasFiltered && value) && <p className="error" >There is no gnome matching the word {value}</p>}
 
 
         </section>
