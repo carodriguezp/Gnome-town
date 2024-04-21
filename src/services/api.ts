@@ -26,22 +26,13 @@ const getDataFromApi = () => {
 
 getDataFromApi()
 
-const getDataByIdFromApi = (id: number) => {
+const getDataByIdFromApi = async (id: number) => {
 
-    return fetch(`https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json/${id}`)
-        .then(response => response.json())
-        .then((gnome) => {
-            return {
-                id: gnome.id,
-                name: gnome.name,
-                image: gnome.thumbnail,
-                age: gnome.age,
-                hair_color: gnome.hair_color,
-                job: gnome.professions,
-                friends: gnome.friends
-            };
-        });
+    const allGnomes = await getDataFromApi()
 
+    const gnome = allGnomes.find((gnome) => gnome.id === id)
+
+    return gnome
 };
 
 export { getDataFromApi, getDataByIdFromApi }
