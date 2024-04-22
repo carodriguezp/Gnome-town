@@ -33,8 +33,8 @@ function Main() {
         setFilterJob(value)
     }
 
-    const handleSortAge = () => {
-
+    const handleSortAge = (value: string) => {
+        setSortAge(value)
     }
 
     const filteredGnomes = gnomes
@@ -46,6 +46,13 @@ function Main() {
                 return gnome.job
             } else if (filterJob === "All") {
                 return true
+            }
+        })
+        .sort((a, b) => {
+            if (sortAge === "Ascending") {
+                return a.age - b.age
+            } else {
+                return b.age - a.age
             }
         })
 
