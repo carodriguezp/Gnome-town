@@ -6,30 +6,33 @@ import InputText from './inputText/InputText'
 //crear objeto de las props de filter 
 //crear tipo del objeto como hice en inputText
 
-function Form(props: { filterName: string, handleFilterName: (x: string) => void, hasFiltered: boolean }) {
+function Form(props: { filterName: string, handleFilterName: (x: string) => void, hasFiltered: boolean, handleFilterJob: (x: string) => void, handleSortAge: (x: string) => void }) {
 
     const {
         filterName,
         handleFilterName,
-        hasFiltered
+        hasFiltered,
+        handleFilterJob,
+        handleSortAge
     } = props
 
 
     const [sortedJobsArray, setSortedJobsArray] = useState<Array<string>>([])
     const [sortAgeArray, setSortAgeArray] = useState<Array<string>>(["Ascending", "Descending"])
 
-    useEffect(() => { setJobs() }, [])
 
     const setJobs = async () => {
         const jobsOptions = await getJobList()
         setSortedJobsArray(jobsOptions)
     }
 
+    useEffect(() => { setJobs() }, [])
+
     return (
         <form>
             <InputText placeholder="Tobus Quickwhistle" value={filterName} handleChange={handleFilterName} hasFiltered={hasFiltered} />
-            <Dropdown labelText="Filter by profession" optionsList={sortedJobsArray} />
-            <Dropdown labelText="Sort by age" optionsList={sortAgeArray} />
+            <Dropdown labelText="Filter by profession" optionsList={sortedJobsArray} handleChange={handleFilterJob} />
+            <Dropdown labelText="Sort by age" optionsList={sortAgeArray} handleChange={handleSortAge} />
         </form>
     )
 }

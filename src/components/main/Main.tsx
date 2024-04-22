@@ -11,6 +11,8 @@ function Main() {
 
     const [gnomes, setGnomes] = useState<GnomeTypeResponse[]>([]);
     const [filterName, setFilterName] = useState("") //para guardar el Filter por nombre
+    const [filterJob, setFilterJob] = useState("All")
+    const [sortAge, setSortAge] = useState("Ascending")
 
     async function fetchGnomes() {
         try {
@@ -27,9 +29,24 @@ function Main() {
         setFilterName(value)
     }
 
+    const handleFilterJob = (value: string) => {
+        setFilterJob(value)
+    }
+
+    const handleSortAge = () => {
+
+    }
+
     const filteredGnomes = gnomes
         .filter((gnome) => {
             return gnome.name.toLowerCase().includes(filterName.toLowerCase())
+        })
+        .filter((gnome) => {
+            if (gnome.job.toString().includes(filterJob)) {
+                return gnome.job
+            } else if (filterJob === "All") {
+                return true
+            }
         })
 
     const hasFiltered = !!filteredGnomes.length
@@ -42,7 +59,7 @@ function Main() {
     return (
         <section>
 
-            <Form filterName={filterName} handleFilterName={handleFilterName} hasFiltered={hasFiltered} />
+            <Form filterName={filterName} handleFilterName={handleFilterName} hasFiltered={hasFiltered} handleFilterJob={handleFilterJob} handleSortAge={handleSortAge} />
 
             <GnomeList gnomes={filteredGnomes} />
         </section>
