@@ -1,19 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
+import LoadingState from '../../LoadingState';
 import { useState, useEffect } from "react";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { getDataByIdFromApi } from '../../../services/api';
-import LoadingState from '../../LoadingState';
+
 import { GnomeTypeResponse } from '../../common.types';
+import { colors, fonts } from '../../../styles/variables';
+
 
 function GnomeDetail() {
 
     const [gnome, setGnome] = useState<GnomeTypeResponse>();
     const [isLoading, setIsLoading] = useState(true);
 
-    //para la logica de friends
+    //friends
     const [isFriend, setIsFriend] = useState(false);
     const [newFriendText, setNewFriendText] = useState("We are not friends, Do you want to be one?");
-    const [newFriendIconText, setNewFriendIconText] = useState("fa-heart-crack")
+    const [newFriendIconText, setNewFriendIconText] = useState("fa-regular")
 
 
     const manageFriend = () => {
@@ -21,13 +25,12 @@ function GnomeDetail() {
 
         if (!isFriend) {
             setNewFriendText("Now we are friends")
-            setNewFriendIconText("fa-heart")
+            setNewFriendIconText("fa-solid")
         } else {
             setNewFriendText("We are not friends, Do you want to be one?")
-            setNewFriendIconText("fa-heart-crack")
+            setNewFriendIconText("fa-regular")
         }
     }
-
 
     const { pathname } = useLocation(); //pathname es la propiedad de la info de la ruta, hacemos destructuring
 
@@ -55,37 +58,122 @@ function GnomeDetail() {
         setIsLoading(false)
     }
 
-
-
     useEffect(() => {
         setGnomeFromApi()
     }, [])
 
+
+    const Card = styled.div`
+        background-color:${colors.clarireForest};
+        padding: 10px;
+        margin:10px;
+        border-radius: 5px;
+        border: 1px solid ${colors.darkForest};
+
+        @media all and (min-width: 1024px) {
+            width:60%;
+            margin: 50px auto
+            };
+        `;
+
+    const IconExit = styled.i`
+        font-size: 1rem;
+        color:${colors.darkCoffee};
+        background-color:${colors.claireWood};
+        border-radius: 100%;
+        @media all and (min-width: 768px) {
+            font-size: 1.5rem;
+            };
+        `;
+
+    const Article = styled.article`
+        @media all and (min-width: 768px) {
+            display: flex
+            };
+        
+        img{
+            width:250px;
+            display: block;
+            margin: 0 auto;
+        @media all and (min-width: 1024px) {
+                width:300px;
+                margin: 0 5%
+            };
+        };
+
+        `;
+
+    const Text = styled.section`
+        color: ${colors.darkForest};
+        font-family: ${fonts.petrona};
+        font-size:1rem;
+        padding-left: 10px;
+        @media all and (min-width: 768px) {
+            font-size:1.1rem;
+            max-width: 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            };
+            @media all and (min-width: 1024px) {
+                font-size:1.3rem;
+                padding-right:20px
+            };
+        `;
+
+    const DivFriend = styled.div`
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+     `;
+
+    const IconFriend = styled.i`
+        font-size: 1.2rem;
+        color:${colors.claireBrownRed};
+
+        &:hover{
+            cursor: pointer;
+        }
+        @media all and (min-width: 1024px) {
+                font-size:1.5rem;
+            };
+    `;
+
+    const TextFriend = styled.p`
+        font-size: 1rem;
+        color:${colors.brownRed};
+        @media all and (min-width: 768px) {
+            font-size:1.1rem;
+            };
+            @media all and (min-width: 1024px) {
+                font-size:1.3rem;
+            };
+            `;
+
     return (
         isLoading ? <LoadingState /> : (gnome ?
-            <div className="" >
-
+            <Card >
                 <Link to={`/`} >
-                    <i className="fa-solid fa-square-xmark"></i>
+                    <IconExit className="fa-regular fa-circle-xmark"></IconExit>
                 </Link>
 
-                <div className="">
+                <Article>
 
-                    <img className="" src={gnome.image} alt={gnome.name} />
-                    <section className="">
-                        <p>Name: {gnome.name}</p>
-                        <p>Age: {gnome.age}</p>
-                        <p>Hair Color: {gnome.hairColor}</p>
-                        <p>Works as: {gnome.job.length ? gnome.job.join(", ") : "Nothing"}</p>
-                        <p>Friends: {gnome.friends.length ? gnome.friends.join(", ") : "Nobody"}</p>
-                        <div>
-                            <p>{newFriendText}</p>
-                            <i className={`fa-solid ${newFriendIconText}`} onClick={manageFriend}></i>
-                        </div>
+                    <img src={gnome.image} alt={gnome.name} />
+                    <Text>
+                        <p><b>Name: </b>{gnome.name}</p>
+                        <p><b>Age: </b>{gnome.age}</p>
+                        <p><b>Hair Color: </b>{gnome.hairColor}</p>
+                        <p><b>Works as: </b>{gnome.job.length ? gnome.job.join(", ") : "Nothing"}</p>
+                        <p><b>Friends: </b>{gnome.friends.length ? gnome.friends.join(", ") : "Nobody"}</p>
+                        <DivFriend>
+                            <TextFriend>{newFriendText}</TextFriend>
+                            <IconFriend className={`${newFriendIconText} fa-heart`} onClick={manageFriend}></IconFriend>
+                        </DivFriend>
 
-                    </section>
-                </div>
-            </div>
+                    </Text>
+                </Article>
+            </Card>
             : <div><p>NO GNOME FOUND</p></div>)
     )
 }

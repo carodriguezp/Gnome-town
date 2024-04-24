@@ -37,7 +37,7 @@ function Form(props: { filterName: string, handleFilterName: (x: string) => void
     background-color: ${colors.faireBrownRed};
     font-size: 1rem;
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid ${colors.brownRed};
     border-radius: 5px;
     @media (min-width: 1024px) {
 

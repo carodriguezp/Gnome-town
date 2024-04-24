@@ -12,6 +12,12 @@ function Header() {
         margin: 15px 0 15px 0;
         background-color: ${colors.faireWood};
 
+        @media all and (min-width: 768px) {
+
+            height: 65px;
+
+}
+
     h1{
         margin: 0;
         color: ${colors.brownRed};
