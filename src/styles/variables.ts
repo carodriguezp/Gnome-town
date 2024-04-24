@@ -2,8 +2,8 @@
 
 export const fonts = {
     titleFamily: "IM Fell English SC",
-    titleWeight: "400"
-
+    titleWeight: "400",
+    petrona: "Petrona"
 
 }
 
@@ -25,8 +25,5 @@ export const colors = {
     darkForest: "#325332",
     forest: "#579157",
     clarireForest: "#8FBC8F"
-
-
-
 
 }
