@@ -1,4 +1,5 @@
 import React from 'react'
+import { Label, SectionForm, Select } from '../../../../styles/SectionForm'
 
 // se reutilizará para el SORT y el PROFESIONS
 
@@ -7,19 +8,18 @@ function Dropdown({ labelText, optionsList, handleChange }: { labelText: string,
 
 
     return (
-        <section>
-            <label htmlFor="">{labelText}</label>
+        <SectionForm>
+            <Label htmlFor="">{labelText}</Label>
 
-            <select
-                className=""
+            <Select
                 onChange={(ev) => handleChange(ev.target.value)}
             >
                 {optionsList.map((option, i) => <option value={option} key={i} >{option}</option>)}
 
 
-            </select>
+            </Select>
 
-        </section>
+        </SectionForm>
     )
 }
 

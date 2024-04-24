@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 import { GnomeTypeResponse } from '../common.types';
 import { getDataFromApi } from '../../services/api';
@@ -63,13 +64,24 @@ function Main() {
 
     }, []);
 
+    const Section = styled.section`
+     margin: 10px;
+
+     @media (min-width: 768px) {
+
+        margin: 30px;
+
+        }
+    `;
+
     return (
-        <section>
+        <Section>
 
             <Form filterName={filterName} handleFilterName={handleFilterName} hasFiltered={hasFiltered} handleFilterJob={handleFilterJob} handleSortAge={handleSortAge} />
 
             <GnomeList gnomes={filteredGnomes} />
-        </section>
+
+        </Section>
     )
 }
 
