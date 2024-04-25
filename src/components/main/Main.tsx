@@ -6,6 +6,7 @@ import { getDataFromApi } from '../../services/api';
 
 import Form from './form/Form';
 import GnomeList from './gnomes/GnomeList';
+import LoadingState from '../LoadingState';
 
 
 function Main() {
@@ -14,12 +15,14 @@ function Main() {
     const [filterName, setFilterName] = useState("") //para guardar el Filter por nombre
     const [filterJob, setFilterJob] = useState("All")
     const [sortAge, setSortAge] = useState("Ascending")
+    const [isLoading, setIsLoading] = useState(true);
 
     async function fetchGnomes() {
         try {
             const allGnomes = await getDataFromApi();
 
             setGnomes(allGnomes)
+            setIsLoading(false)
         } catch (error) {
             console.error('Sorry, the gnomes are on vacation.', error);
         }
@@ -65,6 +68,7 @@ function Main() {
     }, []);
 
     const Section = styled.section`
+   
      margin: 10px;
 
      @media (min-width: 768px) {
@@ -74,12 +78,22 @@ function Main() {
         }
     `;
 
+    const Div = styled.div`
+    margin: -10px;
+
+    @media (min-width: 768px) {
+
+    margin: -30px;
+
+    }`;
+
+
     return (
         <Section>
 
             <Form filterName={filterName} handleFilterName={handleFilterName} hasFiltered={hasFiltered} handleFilterJob={handleFilterJob} handleSortAge={handleSortAge} />
 
-            <GnomeList gnomes={filteredGnomes} />
+            {isLoading ? <Div><LoadingState /></Div> : <GnomeList gnomes={filteredGnomes} />}
 
         </Section>
     )
