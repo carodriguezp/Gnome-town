@@ -1,40 +1,53 @@
-import React from 'react'
-import styled from 'styled-components';
-import { Input, Label, SectionForm } from '../../../../styles/SectionForm'
+import styled from "styled-components";
+import { Input, Label, SectionForm } from "../../../../styles/SectionForm";
 
-type InputTextType = { value: string, handleChange: (x: string) => void, placeholder: string, hasFiltered: boolean }
+type InputTextType = {
+  value: string;
+  handleChange: (x: string) => void;
+  placeholder: string;
+  hasFiltered: boolean;
+};
 
-function InputText({ value, handleChange, placeholder, hasFiltered }: InputTextType) {
+const ErrorText = styled.span`
+  color: darkred;
+  font-size: 0.8rem;
+  text-align: center;
 
-    const ErrorText = styled.span`
-        color:darkred; 
-        font-size: 0.8rem;
-        text-align: center;
+  @media (min-width: 768px) {
+    font-size: 1.3rem;
+    position: absolute;
+    top: 50%;
+  }
 
-        @media (min-width: 768px) {
-        font-size: 1.3rem;
-        position: absolute;
-        top: 50%;
-        };
+  @media (min-width: 1024px) {
+    top: 30%;
+  }
+`;
 
-        @media (min-width: 1024px) { 
-            top: 30%;
-        }
-        `;
+function InputText({
+  value,
+  handleChange,
+  placeholder,
+  hasFiltered,
+}: InputTextType) {
+  return (
+    <>
+      <SectionForm>
+        <Label htmlFor="name">Filter by Name</Label>
 
-
-    return (
-        <>
-            <SectionForm>
-
-                <Label htmlFor="name">Filter by Name</Label>
-
-                <Input type="text" name="name" placeholder={placeholder} value={value} onChange={(ev) => handleChange(ev.target.value)} />
-
-            </SectionForm>
-            {(!hasFiltered && value) && <ErrorText>There is no gnome matching the word "{value}"</ErrorText>}
-        </>
-    )
+        <Input
+          type="text"
+          name="name"
+          placeholder={placeholder}
+          value={value}
+          onChange={(ev) => handleChange(ev.target.value)}
+        />
+      </SectionForm>
+      {!hasFiltered && value && (
+        <ErrorText>There is no gnome matching the word "{value}"</ErrorText>
+      )}
+    </>
+  );
 }
 
-export default InputText
+export default InputText;

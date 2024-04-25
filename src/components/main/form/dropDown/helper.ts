@@ -1,7 +1,5 @@
 import { getDataFromApi } from "../../../../services/api";
 
-
-
 export async function getJobList() {
 
     const allGnomes = await getDataFromApi()

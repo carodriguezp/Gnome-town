@@ -1,58 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import styled from 'styled-components';
-import { fonts, colors } from '../styles/variables';
+import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import styled from "styled-components";
+import { colors } from "../styles/variables";
 
-import { getDataFromApi } from '../services/api';
-import type { GnomeType, GnomeTypeResponse } from '../components/common.types'
-import { getJobList } from './main/form/dropDown/helper';
+import { getDataFromApi } from "../services/api";
+import type { GnomeTypeResponse } from "../components/common.types";
 
-import Header from './Header';
-import Form from './main/form/Form';
-import GnomeList from './main/gnomes/GnomeList';
-import GnomeDetail from './main/gnomes/GnomeDetail';
-import Main from './main/Main';
+import Header from "./Header";
+import GnomeDetail from "./main/gnomes/GnomeDetail";
+import Main from "./main/Main";
 
-
-
-
+const Container = styled.main`
+  background-color: ${colors.faireWood};
+  text-decoration: none;
+`;
 
 function App() {
-
-  const [gnomesBrastlewark, setGnomesBrastlewark] = useState<GnomeTypeResponse[]>([]);
-
+  const [gnomesBrastlewark, setGnomesBrastlewark] = useState<
+    GnomeTypeResponse[]
+  >([]);
 
   const fetchDataFromApi = async () => {
-    const data = await getDataFromApi()
-    setGnomesBrastlewark(data)
-  }
-
+    const data = await getDataFromApi();
+    setGnomesBrastlewark(data);
+  };
 
   useEffect(() => {
-
-    fetchDataFromApi()
-
-  }, [])
-
-
-  //style
-
-  const Container = styled.main`
-    background-color: ${colors.faireWood};
-    text-decoration: none;
-  `;
+    fetchDataFromApi();
+  }, []);
 
   return (
-    <Container >
-
+    <Container data-testid="main-app-test">
       <Header />
 
       <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/gnome/:idGnome' element={<GnomeDetail />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/gnome/:idGnome" element={<GnomeDetail />} />
       </Routes>
-
-
     </Container>
   );
 }
