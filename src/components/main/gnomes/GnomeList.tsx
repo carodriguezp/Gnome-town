@@ -94,6 +94,7 @@ function GnomeList({ gnomes }: { gnomes: GnomeTypeResponse[] }) {
             font-family: ${fonts.petrona};
             font-size:1rem;
             padding-left: 10px;
+
         }
     `;
 

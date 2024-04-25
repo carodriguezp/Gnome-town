@@ -18,6 +18,8 @@ export async function getJobList() {
     // Ordenar alfabéticamente
     const sortedUniqueJobs = uniqueJobs.sort();
 
+    const sortedWithUnemployed = sortedUniqueJobs.push("Unemployed")
+
     const sortedWithDefault = sortedUniqueJobs.unshift("All")
 
     return sortedUniqueJobs;

@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import styled from 'styled-components';
+
 
 import { GnomeTypeResponse } from '../common.types';
 import { getDataFromApi } from '../../services/api';
 
 import Form from './form/Form';
-import GnomeList from './gnomes/GnomeList';
+//import GnomeList from './gnomes/GnomeList';
 import LoadingState from '../LoadingState';
+
+const GnomeList = lazy(() => import('./gnomes/GnomeList'));
 
 
 function Main() {
@@ -93,7 +96,14 @@ function Main() {
 
             <Form filterName={filterName} handleFilterName={handleFilterName} hasFiltered={hasFiltered} handleFilterJob={handleFilterJob} handleSortAge={handleSortAge} />
 
-            {isLoading ? <Div><LoadingState /></Div> : <GnomeList gnomes={filteredGnomes} />}
+            {/* {isLoading ? <Div><LoadingState /></Div> : <GnomeList gnomes={filteredGnomes} />} */}
+
+
+            {filteredGnomes ? (
+                <Suspense fallback={<Div><LoadingState /></Div>}>
+                    <GnomeList gnomes={filteredGnomes} />
+                </Suspense>
+            ) : (<p>'Sorry, the gnomes are on vacation.'</p>)}
 
         </Section>
     )
