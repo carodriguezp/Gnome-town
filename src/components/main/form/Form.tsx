@@ -35,10 +35,7 @@ function Form(props: {
   } = props;
 
   const [sortedJobsArray, setSortedJobsArray] = useState<Array<string>>([]);
-  const [sortAgeArray, setSortAgeArray] = useState<Array<string>>([
-    "Ascending",
-    "Descending",
-  ]);
+  const [sortAgeArray] = useState<Array<string>>(["Ascending", "Descending"]);
 
   const setJobs = async () => {
     const jobsOptions = await getJobList();
