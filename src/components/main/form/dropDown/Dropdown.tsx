@@ -13,7 +13,10 @@ function Dropdown({
     <SectionForm>
       <Label htmlFor="">{labelText}</Label>
 
-      <Select onChange={(ev) => handleChange(ev.target.value)}>
+      <Select
+        data-testid="input-select"
+        onChange={(ev) => handleChange(ev.target.value)}
+      >
         {optionsList.map((option, i) => (
           <option value={option} key={i}>
             {option}
