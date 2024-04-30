@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { fonts, colors } from "../styles/variables";
+import { fonts, colors } from "../../styles/variables";
 
 const HeaderStyled = styled.header`
   position: sticky;
