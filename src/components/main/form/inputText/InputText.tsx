@@ -36,6 +36,7 @@ function InputText({
         <Label htmlFor="name">Filter by Name</Label>
 
         <Input
+          data-testid="input"
           type="text"
           name="name"
           placeholder={placeholder}
@@ -44,7 +45,9 @@ function InputText({
         />
       </SectionForm>
       {!hasFiltered && value && (
-        <ErrorText>There is no gnome matching the word "{value}"</ErrorText>
+        <ErrorText data-testid="error-message">
+          There is no gnome matching the word "{value}"
+        </ErrorText>
       )}
     </>
   );
