@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { fonts, colors } from "../../../styles/variables";
-import { StyledLink } from "../../../styles/StyledLink";
-import type { GnomeTypeResponse } from "../../common.types";
+import { fonts, colors } from "../../../../styles/variables";
+import { StyledLink } from "../../../../styles/StyledLink";
+import type { GnomeTypeResponse } from "../../../common.types";
 
 const Section = styled.section`
   h2 {
@@ -89,10 +89,10 @@ function GnomeList({ gnomes }: { gnomes: GnomeTypeResponse[] }) {
     <Section>
       <h2>List of Gnomes</h2>
 
-      <List>
+      <List data-testid="list-of-gnomes">
         {gnomes.map((gnome) => {
           return (
-            <li key={gnome.id}>
+            <li key={gnome.id} data-testid={gnome.name}>
               <StyledLink to={`/gnome/${gnome.id}`}>
                 <InfoCard>
                   <img src={gnome.image} alt={gnome.name} />
