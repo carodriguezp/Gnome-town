@@ -156,8 +156,6 @@ function GnomeDetail() {
     setGnomeFromApi();
   }, []);
 
-  console.log({ gnome, isLoading });
-
   return isLoading ? (
     <LoadingState />
   ) : gnome ? (

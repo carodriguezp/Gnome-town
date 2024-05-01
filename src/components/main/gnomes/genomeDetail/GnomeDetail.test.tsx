@@ -5,7 +5,6 @@ import { mockdGnome } from "../mocks";
 import userEvent from "@testing-library/user-event";
 
 //PARA RENDER Y PARA EL CORAZON-TIENE UN CLICK PRIMERO TENEMSO QE TENER LA INFO DEL GNOMO
-//
 
 ////Vamos a mockear la biblioteca de react-router-dom
 // añadir los valores reales del componente, qeu son los que se importan
@@ -66,7 +65,6 @@ describe("GnomeDetail", () => {
         await waitFor(() => screen.findByTestId("gnome-card"));
 
         const iconHeart = screen.getByTestId("icon-heart");
-
         const textNoFriend = screen.getByText(
           "We are not friends, Do you want to be one?"
         );
