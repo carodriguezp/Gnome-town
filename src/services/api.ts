@@ -1,12 +1,14 @@
 import type { GnomeType, GnomeTypeResponse } from '../components/common.types'
 
-const getDataFromApi = () => {
+const getDataFromApi= () => {
 
     return fetch('https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json')
         .then(response => {
             return response.json()
         })
         .then((data) => {
+
+            if(!data){return null}
 
             const cleanData: GnomeTypeResponse[] = data["Brastlewark"].map((gnome: GnomeType) => {
                 return {
@@ -20,15 +22,18 @@ const getDataFromApi = () => {
                 }
             });
 
+            
+
             return cleanData
         });
 };
 
-getDataFromApi()
 
 const getDataByIdFromApi = async (id: number) => {
 
     const allGnomes = await getDataFromApi()
+
+    if (!allGnomes){return null}
 
     const gnome = allGnomes.find((gnome) => gnome.id === id)
 
