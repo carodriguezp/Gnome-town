@@ -1,13 +1,11 @@
 import Router from "react-router-dom";
 import { render, screen, waitFor } from "@testing-library/react";
-import GnomeDetail from "./GnomeDetail";
-import { mockdGnome } from "../mocks";
 import userEvent from "@testing-library/user-event";
+import GnomeDetail from "./GnomeDetail";
+import { mockdGnome } from "../../mocks";
 
-//PARA RENDER Y PARA EL CORAZON-TIENE UN CLICK PRIMERO TENEMSO QE TENER LA INFO DEL GNOMO
-
-////Vamos a mockear la biblioteca de react-router-dom
-// añadir los valores reales del componente, qeu son los que se importan
+//Vamos a mockear la biblioteca de react-router-dom
+// añadir los valores reales del componente, que son los que se importan
 //vamos a mockear el matchpath
 
 jest.mock("react-router-dom", () => ({
@@ -98,11 +96,7 @@ describe("GnomeDetail", () => {
     });
 
     it("shows message error", async () => {
-      render(
-        <Router.MemoryRouter>
-          <GnomeDetail />
-        </Router.MemoryRouter>
-      );
+      renderFunction();
 
       const messageError = await waitFor(
         async () => await screen.findByTestId("gnome-message-error") //porque no hay certeza de que esté

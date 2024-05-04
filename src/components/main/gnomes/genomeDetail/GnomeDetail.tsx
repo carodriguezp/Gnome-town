@@ -109,7 +109,7 @@ const TextError = styled.div`
 `;
 
 function GnomeDetail() {
-  const [gnome, setGnome] = useState<GnomeTypeResponse>();
+  const [gnome, setGnome] = useState<GnomeTypeResponse | null>();
   const [isLoading, setIsLoading] = useState(true);
 
   //friends
