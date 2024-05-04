@@ -6,8 +6,8 @@ import { colors } from "../styles/variables";
 import { getDataFromApi } from "../services/api";
 import type { GnomeTypeResponse } from "../components/common.types";
 
-import Header from "./Header";
-import GnomeDetail from "./main/gnomes/GnomeDetail";
+import Header from "./header/Header";
+import GnomeDetail from "./main/gnomes/genomeDetail/GnomeDetail";
 import Main from "./main/Main";
 
 const Container = styled.main`
@@ -16,19 +16,6 @@ const Container = styled.main`
 `;
 
 function App() {
-  const [gnomesBrastlewark, setGnomesBrastlewark] = useState<
-    GnomeTypeResponse[]
-  >([]);
-
-  const fetchDataFromApi = async () => {
-    const data = await getDataFromApi();
-    setGnomesBrastlewark(data);
-  };
-
-  useEffect(() => {
-    fetchDataFromApi();
-  }, []);
-
   return (
     <Container data-testid="main-app-test">
       <Header />

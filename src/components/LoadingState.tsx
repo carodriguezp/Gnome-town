@@ -55,7 +55,7 @@ const Spinner = styled.div`
 
 function LoadingState() {
   return (
-    <Container>
+    <Container data-testid="loading">
       <Spinner></Spinner>
     </Container>
   );
