@@ -25,6 +25,7 @@ function Form(props: {
   hasFiltered: boolean;
   handleFilterJob: (x: string) => void;
   handleSortAge: (x: string) => void;
+  sortedJobsArray: Array<string>;
 }) {
   const {
     filterName,
@@ -32,19 +33,10 @@ function Form(props: {
     hasFiltered,
     handleFilterJob,
     handleSortAge,
+    sortedJobsArray,
   } = props;
 
-  const [sortedJobsArray, setSortedJobsArray] = useState<Array<string>>([]);
   const [sortAgeArray] = useState<Array<string>>(["Ascending", "Descending"]);
-
-  const setJobs = async () => {
-    const jobsOptions = await getJobList();
-    setSortedJobsArray(jobsOptions);
-  };
-
-  useEffect(() => {
-    setJobs();
-  }, []);
 
   return (
     <FormStyled>
@@ -58,11 +50,13 @@ function Form(props: {
         labelText="Filter by profession"
         optionsList={sortedJobsArray}
         handleChange={handleFilterJob}
+        data-testid="filter-jobs"
       />
       <Dropdown
         labelText="Sort by age"
         optionsList={sortAgeArray}
         handleChange={handleSortAge}
+        data-testid="sort-age"
       />
     </FormStyled>
   );

@@ -13,13 +13,8 @@ describe("Form", () => {
     hasFiltered: true,
     handleFilterJob: jest.fn(),
     handleSortAge: jest.fn(),
-  };
-
-  const inputTextProps = {
-    value: "",
-    handleChange: jest.fn(), //jest es un objeto propio de Jest que sirve para invocar funciones
-    placeholder: "placeholder",
-    hasFiltered: true,
+    setJobs: jest.fn(),
+    sortedJobsArray: [],
   };
 
   const dropdownProps = {
@@ -32,36 +27,31 @@ describe("Form", () => {
     render(<Form {...formProps} />);
 
     const inputText = screen.getByTestId("input");
-    const dropdown = screen.getAllByTestId("input-select");
+    // const dropdown = screen.getAllByTestId("input-select");
+    const dropdownJob = screen.getByTestId("filter-jobs");
+    const dropdownAge = screen.getByTestId("sort-age");
 
     expect(inputText).toBeInTheDocument();
-    expect(dropdown[0]).toBeInTheDocument();
-    expect(dropdown[1]).toBeInTheDocument();
+    expect(dropdownJob).toBeInTheDocument();
+    expect(dropdownAge).toBeInTheDocument();
   });
 
   describe("when user writes in input text", () => {
     it("calls fuction to handle value change", async () => {
-      render(<InputText {...inputTextProps} />);
+      render(<Form {...formProps} />);
 
       const input = screen.getByTestId("input");
       await userEvent.type(input, "jaja");
 
-      expect(inputTextProps.handleChange).toHaveBeenCalled();
+      expect(formProps.handleFilterName).toHaveBeenCalled();
     });
   });
 
-  describe("when user clicks an option from input select", () => {
-    beforeEach(() => {
-      jest.mock("./dropDown/helper", () => ({
-        getJobList: jest.fn().mockResolvedValue(["option-1", "option-2"]),
-      }));
-    });
+  describe("when user clicks an option from jobs dropdown", () => {
+    it("shows array of options and calls function to handle value change", async () => {
+      render(<Form {...formProps} />);
 
-    it("shows array of options and calls function to handle value change", () => {
-      render(<Dropdown {...dropdownProps} />);
-      // eslint-disable-next-line testing-library/no-debugging-utils
-      // screen.debug();
-      const dropdown = screen.getByTestId("input-select");
+      const dropdown = screen.getByTestId("filter-jobs");
 
       userEvent.click(dropdown); //userEvent se usa para eventos controlados que se activan por acción directa del usuario
       fireEvent.change(dropdown, {
@@ -69,7 +59,23 @@ describe("Form", () => {
         target: { value: dropdownProps.optionsList[0] },
       });
 
-      expect(dropdownProps.handleChange).toHaveBeenCalled();
+      expect(formProps.handleFilterJob).toHaveBeenCalled();
+    });
+  });
+
+  describe("when user clicks an option from sort dropdown", () => {
+    it("shows array of options and calls function to handle value change", () => {
+      render(<Form {...formProps} />);
+
+      const dropdown = screen.getByTestId("sort-age");
+
+      userEvent.click(dropdown); //userEvent se usa para eventos controlados que se activan por acción directa del usuario
+      fireEvent.change(dropdown, {
+        //fireEvent se usa para eventos no controlados, ya que el option no tiene un onChange, sin embargo el click dispara que se llame a una función
+        target: { value: dropdownProps.optionsList[0] },
+      });
+
+      expect(formProps.handleSortAge).toHaveBeenCalled();
     });
   });
 });
