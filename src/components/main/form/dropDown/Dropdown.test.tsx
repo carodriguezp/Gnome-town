@@ -8,6 +8,7 @@ describe("Dropdown", () => {
       labelText: "mock label",
       optionsList: ["option-1", "option-2"],
       handleChange: jest.fn(),
+      ["data-testid"]: "input-select",
     };
 
     it("shows options available from props", async () => {

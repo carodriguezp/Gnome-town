@@ -4,6 +4,7 @@ function Dropdown({
   labelText,
   optionsList,
   handleChange,
+  ...rest
 }: {
   labelText: string;
   optionsList: string[];
@@ -11,11 +12,12 @@ function Dropdown({
 }) {
   return (
     <SectionForm>
-      <Label htmlFor="">{labelText}</Label>
+      <Label htmlFor={labelText}>{labelText}</Label>
 
       <Select
-        data-testid="input-select"
+        name={labelText}
         onChange={(ev) => handleChange(ev.target.value)}
+        {...rest}
       >
         {optionsList.map((option, i) => (
           <option value={option} key={i}>
