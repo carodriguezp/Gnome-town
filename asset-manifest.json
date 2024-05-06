@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Gnome-town/static/css/main.708e26de.css",
+    "main.js": "/Gnome-town/static/js/main.8993ee79.js",
+    "static/js/14.92f5415b.chunk.js": "/Gnome-town/static/js/14.92f5415b.chunk.js",
+    "static/js/453.ed3810f9.chunk.js": "/Gnome-town/static/js/453.ed3810f9.chunk.js",
+    "index.html": "/Gnome-town/index.html",
+    "main.708e26de.css.map": "/Gnome-town/static/css/main.708e26de.css.map",
+    "main.8993ee79.js.map": "/Gnome-town/static/js/main.8993ee79.js.map",
+    "14.92f5415b.chunk.js.map": "/Gnome-town/static/js/14.92f5415b.chunk.js.map",
+    "453.ed3810f9.chunk.js.map": "/Gnome-town/static/js/453.ed3810f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.708e26de.css",
+    "static/js/main.8993ee79.js"
+  ]
+}
