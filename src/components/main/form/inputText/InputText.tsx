@@ -11,6 +11,7 @@ type InputTextType = {
 const ErrorText = styled.span`
   color: darkred;
   font-size: 0.8rem;
+  width: 100%;
   text-align: center;
 
   @media (min-width: 768px) {
