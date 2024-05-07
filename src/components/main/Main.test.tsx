@@ -98,7 +98,7 @@ describe("Main", () => {
 
         getDataFromApiMockd.mockResolvedValue(null);
       });
-      // const getJobListMockd = getJobList as jest.MockedFunction<any>;
+
       it("shows message error", async () => {
         renderFunction();
 

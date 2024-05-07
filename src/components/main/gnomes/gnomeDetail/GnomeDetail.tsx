@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import LoadingState from "../../../LoadingState";
 import { useState, useEffect } from "react";
 import { Link, matchPath, useLocation } from "react-router-dom";
-import { getDataByIdFromApi } from "../../../../services/api";
 
+import { getDataByIdFromApi } from "../../../../services/api";
 import { GnomeTypeResponse } from "../../../common.types";
+import LoadingState from "../../../LoadingState";
 import { colors, fonts } from "../../../../styles/variables";
 
 const Card = styled.div`
@@ -154,7 +154,7 @@ function GnomeDetail() {
 
   useEffect(() => {
     setGnomeFromApi();
-  }, []);
+  });
 
   return isLoading ? (
     <LoadingState />

@@ -1,9 +1,6 @@
 //TEST DE INTEGRACION
-
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import InputText from "./inputText/InputText";
-import Dropdown from "./dropDown/Dropdown";
 import Form from "./Form";
 
 describe("Form", () => {

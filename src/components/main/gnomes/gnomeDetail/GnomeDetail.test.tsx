@@ -1,4 +1,4 @@
-import Router from "react-router-dom";
+import Router, { PathMatch } from "react-router-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import GnomeDetail from "./GnomeDetail";
@@ -29,7 +29,9 @@ describe("GnomeDetail", () => {
     beforeEach(() => {
       jest
         .spyOn(Router, "matchPath") //usamos spyOn para poder editar el matchpath a través del idGnome, ya que no smetemos en le método de un objeto
-        .mockReturnValue({ params: { idGnome: "1" } } as any);
+        .mockReturnValue({
+          params: { idGnome: "1" },
+        } as unknown as PathMatch<string>); //primero reseteamos el tipo y después le decimos cual queremos que sea (porque pathMath devuelve un string)
 
       jest.mock("../../../../services/api", () => ({
         getDataByIdFromApi: jest.fn().mockResolvedValue(mockdGnome),

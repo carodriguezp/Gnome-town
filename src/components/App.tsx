@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import { colors } from "../styles/variables";
 
-import { getDataFromApi } from "../services/api";
-import type { GnomeTypeResponse } from "../components/common.types";
-
 import Header from "./header/Header";
-import GnomeDetail from "./main/gnomes/genomeDetail/GnomeDetail";
+import GnomeDetail from "./main/gnomes/gnomeDetail/GnomeDetail";
 import Main from "./main/Main";
 
 const Container = styled.main`

@@ -1,7 +1,8 @@
 import { MemoryRouter } from "react-router-dom";
-import { mockdGnomeList } from "../../mocks";
 import { render, screen } from "@testing-library/react";
+
 import GnomeList from "./GnomeList";
+import { mockdGnomeList } from "../../mocks";
 
 describe("GnomeList", () => {
   const gnomeListProps = {

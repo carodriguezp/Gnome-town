@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../../styles/variables";
 import Dropdown from "./dropDown/Dropdown";
-import { getJobList } from "./dropDown/helper";
 import InputText from "./inputText/InputText";
 
 const FormStyled = styled.form`
