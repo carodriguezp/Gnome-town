@@ -18,10 +18,11 @@ const ErrorText = styled.span`
     font-size: 1.3rem;
     position: absolute;
     top: 50%;
+    right: 0;
   }
 
   @media (min-width: 1024px) {
-    top: 30%;
+    top: 40%;
   }
 `;
 
