@@ -1,21 +1,20 @@
-type GnomeType = {
+type Gnome ={
     id: number,
     name: string,
-    thumbnail: string,
     age: number,
-    hair_color: string,
-    professions: string[],
     friends: Array<string>
 }
 
-type GnomeTypeResponse = {
-    id: number,
-    name: string,
+type GnomeType = {
+    thumbnail: string,
+        hair_color: string,
+    professions: string[],
+   } & Gnome
+
+type GnomeTypeResponse = { 
     image: string,
-    age: number,
-    hairColor: string,
+        hairColor: string,
     job: string[],
-    friends: Array<string>
-}
+   } & Gnome
 
 export type { GnomeType, GnomeTypeResponse }
