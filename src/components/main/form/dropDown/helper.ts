@@ -1,8 +1,6 @@
-import { getDataFromApi } from "../../../../services/api";
+import { GnomeTypeResponse } from "../../../common.types";
 
-export async function getJobList(){
-
-    const allGnomes = await getDataFromApi()
+export async function getJobList(allGnomes: GnomeTypeResponse[] | null){
 
     if(!allGnomes){return []}
 

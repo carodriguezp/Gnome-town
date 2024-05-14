@@ -34,15 +34,12 @@ function Main() {
   // const [isLoading, setIsLoading] = useState(true);
   const [sortedJobsArray, setSortedJobsArray] = useState<Array<string>>([]);
 
-  const setJobs = async () => {
-    const jobsOptions = await getJobList();
-    setSortedJobsArray(jobsOptions);
-  };
-
   const fetchGnomes = async () => {
     try {
       const allGnomes = await getDataFromApi();
+      const jobsOptions = await getJobList(allGnomes);
       setGnomes(allGnomes);
+      setSortedJobsArray(jobsOptions);
     } catch (error) {
       console.error("Sorry, the gnomes are on vacation.", error);
     }
@@ -87,7 +84,6 @@ function Main() {
 
   useEffect(() => {
     fetchGnomes();
-    setJobs();
   }, []);
 
   return (
