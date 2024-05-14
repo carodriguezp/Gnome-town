@@ -143,18 +143,22 @@ function GnomeDetail() {
   };
 
   const setGnomeFromApi = async () => {
-    const id = getIdFromURL();
+    try {
+      const id = getIdFromURL();
 
-    const gnomeFromApi = await getDataByIdFromApi(id);
+      const gnomeFromApi = await getDataByIdFromApi(id);
 
-    setGnome(gnomeFromApi);
+      setGnome(gnomeFromApi);
 
-    setIsLoading(false);
+      setIsLoading(false);
+    } catch (error) {
+      throw Error("oops something went wrong");
+    }
   };
 
   useEffect(() => {
     setGnomeFromApi();
-  });
+  }, []);
 
   return isLoading ? (
     <LoadingState />
