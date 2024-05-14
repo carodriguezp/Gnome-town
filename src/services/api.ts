@@ -1,16 +1,24 @@
 import type { GnomeType, GnomeTypeResponse } from '../components/common.types'
 
-const getDataFromApi= () => {
+type APIResponse = {
+    Brastlewark: Array<GnomeType>;
+    };
+    
+const APIURL = 'https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json';
 
-    return fetch('https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json')
+//al tener 2 funciones en la segunda función emulo un endpoint by ID, ya que la API no lo tiene
+
+const getDataFromApi= () => {
+ try {
+    return fetch(APIURL)
         .then(response => {
             return response.json()
         })
-        .then((data) => {
+        .then((data: APIResponse) => {
 
             if(!data){return null}
 
-            const cleanData: GnomeTypeResponse[] = data["Brastlewark"].map((gnome: GnomeType) => {
+            const cleanData: GnomeTypeResponse[] = data.Brastlewark.map((gnome: GnomeType) => {
                 return {
                     id: gnome.id,
                     name: gnome.name,
@@ -22,15 +30,17 @@ const getDataFromApi= () => {
                 }
             });
 
-            
-
             return cleanData
         });
+ } catch (error) {
+    throw Error("There was an error on request or process data")
+ }
+    
 };
 
 
 const getDataByIdFromApi = async (id: number) => {
-
+try {
     const allGnomes = await getDataFromApi()
 
     if (!allGnomes){return null}
@@ -38,6 +48,11 @@ const getDataByIdFromApi = async (id: number) => {
     const gnome = allGnomes.find((gnome) => gnome.id === id)
 
     return gnome
+} catch (error) {
+    throw Error("There was an error on request or process data")
+}
+
+    
 };
 
 export { getDataFromApi, getDataByIdFromApi }
